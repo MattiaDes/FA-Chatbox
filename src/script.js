@@ -14,6 +14,7 @@
   if(typeof(fa_script) !== "undefined" && fa_script.install == false) {
   	$('#fa_footer center').prepend('<input type="submit" name="fa_install_find" value="Install" />');
   } else if(typeof(fa_script) !== "undefined" && fa_script.install == true) {
+	$('div#fa_content > ul').html('<li class="shout_row"><font color="green">Your chatbox was update to date. | Curent version usage chatbox: 1.0 (Last Update: 02.01.2018)</font></li>');
   	$('#fa_footer center').html('<input type="submit" name="fa_uninstall" value="Uninstall"><input type="submit" name="fa_check" value="Check Update"><input type="submit" name="fa_settings" value="Settings">');
   }
 	
