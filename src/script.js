@@ -31,7 +31,7 @@
 		'};\n'+
 	'//]]>';
 
-	index_chatbox = "text/javascript";
+	index_chatbox.type = "text/javascript";
 	index_chatbox.innerHTML = '//<![CDATA[\n'+
 		'document.write(\'<script type="text/javascript" src="http://www.cdn.faproject.eu/chatbox/fachatbox.php?forum='+ forum +'"><\/script>\');\n'+
 	'//]]>';
