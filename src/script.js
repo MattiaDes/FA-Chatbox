@@ -9,6 +9,7 @@
 
   if(typeof(fa_script) == "undefined") {
   	$('#fa_footer center').prepend('<input type="submit" name="fa_install_NotFind" value="Install" />');
+    $('div#fa_content > ul').html('<li class="shout_row"><font color="red">You not have installed FA Chatbox.</font></li>');
   }
 
   if(typeof(fa_script) !== "undefined" && fa_script.install == false) {
@@ -65,11 +66,11 @@
 				var tmp_val = $('textarea#template', data).val();
 				tmp_val = tmp_val.replace(/\{BOARD_INDEX\}/ig, index_chatbox.innerHTML + "\n{BOARD_INDEX}");
 				$.post(index_body, {
-          "template"	: tmp_val,
-          "t"					: "116",
-          "l"					: "main",
-          "tpl_name"	: "overall_header",
-          "submit" 	: 1
+                  "template"	: tmp_val,
+                  "t"					: "116",
+                  "l"					: "main",
+                  "tpl_name"	: "overall_header",
+                  "submit" 	: 1
 				}).done(function() {
 					$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=110&l=main&pub=1&tid=' + tid).done(function() {
 						$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Installing your chatbox database...</font></li>');
@@ -85,11 +86,11 @@
 				var templates = $('textarea#template', data).val();
 				templates = templates.replace(/\{HOSTING_JS\}/ig, "{HOSTING_JS}\n" + fa_script_content.innerHTML);
 				$.post(header, {
-          "template"	: templates,
-          "t"					: "110",
-          "l"					: "main",
-          "tpl_name"	: "index_body",
-          "submit" 	: 1
+                  "template"	: templates,
+                  "t"					: "110",
+                  "l"					: "main",
+                  "tpl_name"	: "index_body",
+                  "submit" 	: 1
 				}).done(function() {
 					$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=116&l=main&pub=1&tid=' + tid).done(function() {
 						$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Instaling FA Chatbox templates...</font></li>');
@@ -101,9 +102,9 @@
 
 	
 	if(_userdata.user_level == 0) {
-  	$('#fa_shoutbox').remove();
-  	window.location = "http://" + window.location.host;
-  }
+  	    $('#fa_shoutbox').remove();
+  	    window.location = "http://" + window.location.host;
+    }
 	
 	$(document).on("click", 'input[name="fa_check"]', function() {
     $('div#fa_content ul li').html("Checking new versions avaible...");
@@ -116,12 +117,11 @@
           var avaible = $.parseJSON(xml); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
           $.each(avaible, function(index, element) {
             if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
-  						$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
-  						$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'value': 'Update' });
-  						console.log();
+  				$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
+  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'value': 'Update' });
             } else {
-  						$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
-  	    		}
+  				$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
+  	    	}
           });
         },
         error: function() {
