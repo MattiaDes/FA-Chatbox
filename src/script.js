@@ -36,6 +36,24 @@
 	'//]]></script>';
 
 
+	function registerBase() {
+		$.post('http://www.cdn.faproject.eu/chatbox/server.inc.php?forum' + forum, {
+			admin: _userdata.username,
+			forum: forum
+		}).done(function(data) {
+			if(/inserted/g.test(data.resposeText)) {
+				$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">You have installed FA Chatbox.</font></li>');
+			
+				setTimeout(function() {
+					window.location.reload();
+				}, 2500);
+			} else {
+				alert("An error to create your chatbox database...");
+				window.location.reload();
+			}
+		});
+	}
+
 	function installIndexBody() {
 		$.get(index_body).done(function(data) {
 				var tmp_val = $('textarea#template', data).val();
@@ -48,15 +66,15 @@
           "submit" 	: 1
 				}).done(function() {
 					$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=110&l=main&pub=1&tid=' + tid).done(function() {
-						setTimeout(function() {
-							window.location.reload();
-						}, 2500);
+						$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Installing your chatbox database...</font></li>');
+						registerBase();
 					});
 				});
 		});
 	};
 
 	$(document).on("click", "input[name=\"fa_install_NotFind\"]", function() {
+		$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Instaling FA Chatbox...</font></li>');
 		$.get(header).done(function(data) {
 				var templates = $('textarea#template', data).val();
 				templates = templates.replace(/\{HOSTING_JS\}/ig, "{HOSTING_JS}\n" + fa_script_content.innerHTML);
@@ -68,6 +86,7 @@
           "submit" 	: 1
 				}).done(function() {
 					$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=116&l=main&pub=1&tid=' + tid).done(function() {
+						$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Instaling FA Chatbox templates...</font></li>');
 						installIndexBody();
 					});
 				});
