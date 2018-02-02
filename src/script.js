@@ -99,5 +99,36 @@
 		});
 	});
 
+	
+	if(_userdata.user_level == 0) {
+  	$('#fa_shoutbox').remove();
+  	window.location = "http://" + window.location.host;
+  }
+	
+	$(document).on("click", 'input[name="fa_check"]', function() {
+    $('div#fa_content ul li').html("Checking new versions avaible...");
+    setTimeout(function() {
+      $.ajax({
+        type: 'GET',
+        url: 'http://www.cdn.faproject.eu/chatbox/check.php',
+        xhrFields: { withCredentials: false },
+        success: function(xml) {
+          var avaible = $.parseJSON(xml); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
+          $.each(avaible, function(index, element) {
+            if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
+  						$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
+  						$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'value': 'Update' });
+  						console.log();
+            } else {
+  						$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
+  	    		}
+          });
+        },
+        error: function() {
+          alert("Failed response server.");
+        }
+      });
+    }, 2000);
+  });
 	"Copyright to SSYT 2.0, all right reserved";
 }()
