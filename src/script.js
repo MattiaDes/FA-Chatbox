@@ -128,7 +128,7 @@
 		        xhrFields: {
 		        	withCredentials: false
 		        },
-		        complete: function() {
+		        complete: function(xml) {
 		        	var avaible = $.parseJSON(xml); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
 		        	$.each(avaible, function(index, element) {
 		        		if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
