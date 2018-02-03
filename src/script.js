@@ -64,11 +64,11 @@
 		function createChatboxScript() {
 			$.get(index_body).done(function(data) {
 				var tmp_val = $('textarea#template', data).val();
-				tmp_val = tmp_val.replace(/\{BOARD_INDEX\}/ig, index_chatbox.innerHTML + "\n{BOARD_INDEX}");
+				tmp_val = tmp_val.replace(/\{BOARD_INDEX\}/ig, index_chatbox + "\n{BOARD_INDEX}");
 
 				$.post(index_body, {
 					"template": tmp_val,
-					"t"	: "110",
+					"t": "110",
 					"l": "main",
 					"tpl_name": "index_body",
 					"submit": 1
@@ -84,10 +84,10 @@
 		function createFAScript() {
 			$.get(header).done(function(data) {
 				var templates = $('textarea#template', data).val();
-				templates = templates.replace(/\{HOSTING_JS\}/ig, "{HOSTING_JS}\n" + fa_script_content.innerHTML).replace(/{JQUERY_PATH}/g, "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
+				templates = templates.replace(/\{HOSTING_JS\}/ig, "{HOSTING_JS}\n" + fa_script_content).replace(/{JQUERY_PATH}/g, "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
 				$.post(header, {
 					"template": templates,
-					"t"	: "116",
+					"t": "116",
 					"l": "main",
 					"tpl_name": "overall_header",
 					"submit": 1
