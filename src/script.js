@@ -124,7 +124,7 @@
 			lang.installed = lang.installed.replace(/%\(ver\)s/ig, fa_script.version);
 		}
 
-		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">'+ lang.installed +' (Last Update: 02.01.2018)</font></li>');
+		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">'+ lang.installed.replace(/%\(date\)s/g, "03.02.2017") +' </font></li>');
 		$('#fa_footer center').html('<input type="submit" name="fa_uninstall" value="'+ lang["buttons"].uninstall +'"><input type="submit" name="fa_check" value="'+ lang["buttons"].check_update +'"><input type="submit" name="fa_settings" value="'+ lang["buttons"].settings +'">');
 	}
 
