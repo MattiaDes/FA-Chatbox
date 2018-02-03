@@ -17,7 +17,7 @@
 			index_chatbox = "";
 
 		fa_script_content = '\n<script type="text/javascript" id="fa_script">//<![CDATA[\n'+
-			'if(typeof(fa_script) == "undefined") var fa_script = {};\n'+
+			'if(typeof(fa_script) == "undefined") var fa_script;\n'+
 			'window.fa_script = {\n'+
 			'  version: "1.0",\n'+
 			'  pos: \'position-top\',\n'+
