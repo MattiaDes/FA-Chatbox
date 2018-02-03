@@ -6,6 +6,7 @@
 
 	var index_body = "/admin/index.forum?part=themes&sub=templates&mode=edit_main&t=110&l=main&extended_admin=1&tid=" + tid,
 		header = "/admin/index.forum?part=themes&sub=templates&mode=edit_main&t=116&l=main&extended_admin=1&tid=" + tid;
+	var checkingURL = 'http://www.cdn.faproject.eu/chatbox/check.php';
 
 	if(typeof(fa_script) == "undefined") {
 		$('#fa_footer center').prepend('<input type="submit" name="fa_install_NotFind" value="Install" />');
@@ -62,7 +63,7 @@
 		function createChatboxScript() {
 			$.get(index_body).done(function(data) {
 				var tmp_val = $('textarea#template', data).val();
-				tmp_val = tmp_val.replace(/\{BOARD_INDEX\}/ig, index_chatbox.innerHTML + "\n{BOARD_INDEX}");
+				tmp_val = tmp_val.replace(/\{BOARD_INDEX\}/ig, index_chatbox.innerHTML + "\n{BOARD_INDEX}").replace(/{JQUERY_PATH}/g, "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
 
 				$.post(index_body, {
 					"template": tmp_val,
@@ -110,7 +111,7 @@
 	if(typeof(fa_script) !== "undefined" && fa_script.install == false) {
 		$('#fa_footer center').prepend('<input type="submit" name="fa_install_find" value="Install" />');
 	} else if(typeof(fa_script) !== "undefined" && fa_script.install == true) {
-		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">Your chatbox was update to date. | Curent version usage chatbox: 1.0 (Last Update: 02.01.2018)</font></li>');
+		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">Your chatbox was update to date. | Curent version usage chatbox: '+ fa_script.version +' (Last Update: 02.01.2018)</font></li>');
 		$('#fa_footer center').html('<input type="submit" name="fa_uninstall" value="Uninstall"><input type="submit" name="fa_check" value="Check Update"><input type="submit" name="fa_settings" value="Settings">');
 	}
 
@@ -119,21 +120,44 @@
   	    window.location = "http://" + window.location.host;
 	}
 
+	function UpdateFAScript(ver) {
+		$.get(header).done(function(data) {
+			var templates = $('textarea#template', data).val();
+			templates = templates.replace(/version: \"(.*?)\"/gi, "version: \""+ ver +"\"\n");
+			$.post(header, {
+				"template": tmp_val,
+				"t"	: "116",
+				"l": "main",
+				"tpl_name": "overall_header",
+				"submit": 1
+			}).done(function(data) {
+				$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Instaling FA Chatbox templates...</font></li>');
+				$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=116&l=main&pub=1&tid=' + tid).done(function() {
+					$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">FA Chatbox was update to last version.</font></li>');
+					
+					setTimeout(function() {
+						window.location.reload();
+					}, 2500);
+				});
+			});
+		});
+	}
+
 	$(document).on("click", 'input[name="fa_check"]', function() {
 		$('div#fa_content ul li').html("Checking new versions avaible...");
 		setTimeout(function() {
 			$.ajax({
 		        type: 'GET',
-		        url: 'http://www.cdn.faproject.eu/chatbox/check.php',
+		        url: checkingURL,
 		        xhrFields: {
 		        	withCredentials: false
 		        },
 		        complete: function(xml) {
-		        	var avaible = $.parseJSON(xml.responseText); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
+		        	var avaible = $.parseJSON(xml); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
 		        	$.each(avaible, function(index, element) {
 		        		if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
 			  				$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
-			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'value': 'Update' });
+			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': 'Update' });
 		        		} else {
 		        			$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
 		        		}
@@ -147,7 +171,8 @@
 	});
 
 	$(document).on("click", 'input[name="fa_update"]', function() {
-		alert("Install is not avaible on this version.");
+		$('div#fa_content ul li').html("Update FA Chatbox to new versions avaible...");
+		UpdateFAScript(ver);
 	});
 
 	$(document).on("click", 'input[name="fa_uninstall"]', function() {
