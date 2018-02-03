@@ -170,7 +170,7 @@
 				var templates = $('textarea#template', data).val();
 				templates = templates.replace(/version: \"(.*?)\"/gi, "version: \""+ ver +"\"");
 				$.post(header, {
-					"template": tmp_val,
+					"template": templates,
 					"t"	: "116",
 					"l": "main",
 					"tpl_name": "overall_header",
@@ -191,7 +191,7 @@
 				var templates = $('textarea#template', data).val();
 				templates = templates.replace(/<script id="fa_script" type="text\/javascript">(.*?)<\/script>/gi, "");
 				$.post(header, {
-					"template": tmp_val,
+					"template": templates,
 					"t"	: "116",
 					"l": "main",
 					"tpl_name": "overall_header",
