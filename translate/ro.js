@@ -1,10 +1,8 @@
 !function(FA_Chatbox) {
 	"use strict";
 	if(typeof(FA_Chatbox) == "undefined") jQuery.error('Uncaught ReferenceError: FA_Chatbox is not defined');
-	var FA_Chatbox = {};
-	
-	
-	window.FA_Chatbox.ro = {
+
+	FA_Chatbox.ro = {
 		panel: {
 			/* Panel Translate */
 			title: "FA Chatbox - Panou de control",
@@ -14,7 +12,7 @@
 				uninstall: "Dezinstaleaza",
 				check_update: "Verifica Actualizari",
 				settings: "Setari"
-			}
+			},
 
 			settings: {
 				title: "Setari Chatbox",
