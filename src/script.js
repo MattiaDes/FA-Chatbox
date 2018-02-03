@@ -25,7 +25,7 @@
 		var fa_script_content = "",
 			index_chatbox = "";
 
-		fa_script_content = '<script id="fa_script" type="text/javascript" src="https://cdn.rawgit.com/SSYT/FA-Chatbox/dde94ad2/translate/ro.js"></script>\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
+		fa_script_content = '<script id="fa_script" type="text/javascript" src="https://cdn.rawgit.com/SSYT/FA-Chatbox/80448090/translate/ro.js"></script>\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
 			'if(typeof(fa_script) == "undefined") var fa_script;\n'+
 			'window.fa_script = {\n'+
 			'  version: "1.0",\n'+
