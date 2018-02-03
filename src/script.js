@@ -19,7 +19,7 @@
 	}
 
 	if(typeof(fa_script) == "undefined") {
-		$('#fa_footer center').prepend('<input type="submit" name="fa_install_NotFind" value="Install" />');
+		$('#fa_footer center').prepend('<input type="submit" name="fa_install_NotFind" value="'+ lang.buttons["install"] +'" />');
 		$('div#fa_content > ul').html('<li class="shout_row"><font color="red">'+ lang.not_install +'</font></li>');
 
 		var fa_script_content = "",
