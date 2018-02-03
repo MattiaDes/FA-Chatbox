@@ -20,7 +20,7 @@
 
 	if(typeof(fa_script) == "undefined") {
 		$('#fa_footer center').prepend('<input type="submit" name="fa_install_NotFind" value="Install" />');
-		$('div#fa_content > ul').html('<li class="shout_row"><font color="red">'+ (lang) ? lang.not_install : "You not have installed FA Chatbox." +'</font></li>');
+		$('div#fa_content > ul').html('<li class="shout_row"><font color="red">'+ (lang != "") ? lang.not_install : "You not have installed FA Chatbox." +'</font></li>');
 
 		var fa_script_content = "",
 			index_chatbox = "";
