@@ -60,14 +60,12 @@
 							window.location.reload();
 						}, 2500);
 					} else {
-						lang.errors['not_found'] = lang.errors['not_found'].replace(/%(status)s/g, "bazei de date");
-						alert(lang.errors['not_found']);
+						alert(lang.errors['not_found'].replace(/%\(status\)s/g, "bazei de date"));
 						window.location.reload();
 					}
 				},
 				error: function() {
-					lang.errors['not_found'] = lang.errors['not_found'].replace(/%(status)s/g, "bazei de date");
-					alert(lang.errors['not_found']);
+					alert(lang.errors['not_found'].replace(/%\(status\)s/g, "bazei de date"));
 					window.location.reload();
 				}
 			});
@@ -118,18 +116,16 @@
 		});
 	}
 
-
-
 	// Other after chatbox was installed
 	if(typeof(fa_script) !== "undefined" && fa_script.install == false) {
-		$('#fa_footer center').prepend('<input type="submit" name="fa_install_find" value="Install" />');
+		$('#fa_footer center').prepend('<input type="submit" name="fa_install_find" value="'+ lang["buttons"].install +'" />');
 	} else if(typeof(fa_script) !== "undefined" && fa_script.install == true) {
 		if(typeof(lang) !== "undefined") {
-			lang.installed = lang.installed.replace(/%(ver)s/ig, fa_script.version);
+			lang.installed = lang.installed.replace(/%\(ver\)s/ig, fa_script.version);
 		}
 
 		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">'+ lang.installed +' (Last Update: 02.01.2018)</font></li>');
-		$('#fa_footer center').html('<input type="submit" name="fa_uninstall" value="Uninstall"><input type="submit" name="fa_check" value="Check Update"><input type="submit" name="fa_settings" value="Settings">');
+		$('#fa_footer center').html('<input type="submit" name="fa_uninstall" value="'+ lang["buttons"].uninstall +'"><input type="submit" name="fa_check" value="'+ lang["buttons"].check_update +'"><input type="submit" name="fa_settings" value="'+ lang["buttons"].settings +'">');
 	}
 
 	if(_userdata.user_level == 0) {
@@ -239,7 +235,7 @@
 		        	$.each(avaible, function(index, element) {
 		        		if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
 			  				$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
-			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': 'Update' });
+			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': lang["buttons"].update });
 		        		} else {
 		        			$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
 		        		}
