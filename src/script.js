@@ -9,12 +9,13 @@
 	var checkingURL = 'http://www.cdn.faproject.eu/chatbox/check.php';
 	var forum = window.location.host; var lang;
 
-	if(fa_script.lang == "RO") {
+	if(typeof(fa_script) != "undefined" && fa_script.lang == "RO") {
 		lang = FA_Chatbox.ro['panel'];
-	} else if(fa_script.lang == "EN") {
+	} else if(typeof(fa_script) != "undefined" && fa_script.lang == "EN") {
 		lang = FA_Chatbox.en['panel'];
 	} else {
-		throw "Lang script not defined.";
+		lang = FA_Chatbox.ro['panel'];
+		throw "Lang script was defined.";
 	}
 
 	if(typeof(fa_script) == "undefined") {
@@ -24,7 +25,7 @@
 		var fa_script_content = "",
 			index_chatbox = "";
 
-		fa_script_content = '<script id="fa_script" type="text/javascript" src="https://cdn.rawgit.com/SSYT/FA-Chatbox/54af19ce/translate/ro.js"></script>\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
+		fa_script_content = '<script id="fa_script" type="text/javascript" src="https://cdn.rawgit.com/SSYT/FA-Chatbox/b43c5d2a/translate/ro.js"></script>\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
 			'if(typeof(fa_script) == "undefined") var fa_script;\n'+
 			'window.fa_script = {\n'+
 			'  version: "1.0",\n'+
