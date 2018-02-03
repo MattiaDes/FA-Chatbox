@@ -25,7 +25,7 @@
 		var fa_script_content = "",
 			index_chatbox = "";
 
-		fa_script_content = '<script id="fa_script" type="text/javascript" src="https://cdn.rawgit.com/SSYT/FA-Chatbox/b43c5d2a/translate/ro.js"></script>\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
+		fa_script_content = '<script id="fa_script" type="text/javascript" src="https://cdn.rawgit.com/SSYT/FA-Chatbox/dde94ad2/translate/ro.js"></script>\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
 			'if(typeof(fa_script) == "undefined") var fa_script;\n'+
 			'window.fa_script = {\n'+
 			'  version: "1.0",\n'+
@@ -60,12 +60,14 @@
 							window.location.reload();
 						}, 2500);
 					} else {
-						alert("An error to create your chatbox database...");
+						lang.errors['not_found'] = lang.errors['not_found'].replace(/%(status)s/g, "bazei de date");
+						alert(lang.errors['not_found']);
 						window.location.reload();
 					}
 				},
 				error: function() {
-					alert("An error to create your chatbox database...");
+					lang.errors['not_found'] = lang.errors['not_found'].replace(/%(status)s/g, "bazei de date");
+					alert(lang.errors['not_found']);
 					window.location.reload();
 				}
 			});
@@ -251,12 +253,12 @@
 	});
 
 	$(document).on("click", 'input[name="fa_update"]', function() {
-		$('div#fa_content ul li').html("Update FA Chatbox to new versions avaible...");
+		$('div#fa_content ul li').html(lang['update']);
 		UpdateFAScript(ver, "update");
 	});
 
 	$(document).on("click", 'input[name="fa_uninstall"]', function() {
-		$('div#fa_content ul li').html("Uninstall FA Chatbox ...");
+		$('div#fa_content ul li').html(lang['remove']);
 		removeFAScript();
 	});
 
