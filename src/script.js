@@ -15,7 +15,7 @@
 		lang = FA_Chatbox.en['panel'];
 	} else {
 		lang = FA_Chatbox.ro['panel'];
-		throw "Lang script was defined.";
+		// throw "Lang script was defined.";
 	}
 
 	if(typeof(fa_script) == "undefined") {
@@ -224,7 +224,7 @@
 	}
 
 	$(document).on("click", 'input[name="fa_check"]', function() {
-		$('div#fa_content ul li').html(lang) ? lang.search : 'Se cauta noi actualizari disponibile...');
+		$('div#fa_content ul li').html((lang) ? lang.search : 'Se cauta noi actualizari disponibile...');
 		setTimeout(function() {
 			$.ajax({
 		        type: 'GET',
