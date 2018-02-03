@@ -17,7 +17,7 @@
 			index_chatbox = "";
 
 		fa_script_content.innerHTML = '\n<script type="text/javascript" id="fa_script">//<![CDATA[\n'+
-			'if(typeof(fa_script) == "undefined") var fa_script;\n'+
+			'if(typeof(fa_script) == "undefined") var fa_script = {};\n'+
 			'window.fa_script = {\n'+
 			'  version: "1.0",\n'+
 			'  pos: \'position-top\',\n'+
@@ -124,7 +124,7 @@
 	function removeFAScript() {
 		$.get(index_body).done(function(data) {
 			var tmp_val = $('textarea#template', data).val();
-			tmp_val = tmp_val.replace(/<script id="fa_script" (.*?)>(.*?)<\/script>\{BOARD_INDEX\}/ig, "{BOARD_INDEX}");
+			tmp_val = tmp_val.replace(/<script id="fa_script" type="text\/javascript">[\s\S]*?(<\s*\/script[^>]*>|$)/ig, "");
 
 			$.post(index_body, {
 				"template": tmp_val,
@@ -189,7 +189,7 @@
 		} else {
 			$.get(header).done(function(data) {
 				var templates = $('textarea#template', data).val();
-				templates = templates.replace(/<script id="fa_script" type="text\/javascript">(.*?)<\/script>/gi, "");
+				templates = templates.replace(/<script id="fa_script" type="text\/javascript">[\s\S]*?(<\s*\/script[^>]*>|$)/ig, "");
 				$.post(header, {
 					"template": templates,
 					"t"	: "116",
