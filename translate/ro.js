@@ -1,8 +1,10 @@
 !function(FA_Chatbox) {
 	"use strict";
 	if(typeof(FA_Chatbox) == "undefined") jQuery.error('Uncaught ReferenceError: FA_Chatbox is not defined');
-
-	FA_Chatbox.ro = {
+	var FA_Chatbox = {};
+	
+	
+	window.FA_Chatbox.ro = {
 		panel: {
 			/* Panel Translate */
 			title: "FA Chatbox - Panou de control",
