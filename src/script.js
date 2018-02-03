@@ -123,7 +123,7 @@
 	function UpdateFAScript(ver) {
 		$.get(header).done(function(data) {
 			var templates = $('textarea#template', data).val();
-			templates = templates.replace(/version: \"(.*?)\"/gi, "version: \""+ ver +"\"\n");
+			templates = templates.replace(/version: \"(.*?)\"/gi, "version: \""+ ver +"\"");
 			$.post(header, {
 				"template": templates,
 				"t": "116",
