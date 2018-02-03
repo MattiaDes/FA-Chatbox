@@ -125,8 +125,8 @@
 			var templates = $('textarea#template', data).val();
 			templates = templates.replace(/version: \"(.*?)\"/gi, "version: \""+ ver +"\"\n");
 			$.post(header, {
-				"template": tmp_val,
-				"t"	: "116",
+				"template": templates,
+				"t": "116",
 				"l": "main",
 				"tpl_name": "overall_header",
 				"submit": 1
