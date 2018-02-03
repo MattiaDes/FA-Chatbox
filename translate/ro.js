@@ -11,7 +11,8 @@
 				install: "Instaleaza",
 				uninstall: "Dezinstaleaza",
 				check_update: "Verifica Actualizari",
-				settings: "Setari"
+				settings: "Setari",
+				update: "Actualizeaza"
 			},
 
 			settings: {
