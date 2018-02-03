@@ -86,7 +86,7 @@
 				var templates = $('textarea#template', data).val();
 				templates = templates.replace(/\{HOSTING_JS\}/ig, "{HOSTING_JS}\n" + fa_script_content.innerHTML).replace(/{JQUERY_PATH}/g, "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
 				$.post(header, {
-					"template": tmp_val,
+					"template": templates,
 					"t"	: "116",
 					"l": "main",
 					"tpl_name": "overall_header",
