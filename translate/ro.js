@@ -31,7 +31,7 @@
 				not_found: "A aparut o eroare la instalarea %(status)s"
 			},
 
-			avaible: "<b>Chatbox Actualizari Dispobibile:</b>\nChatbox-ul nu este actualizat la versiunea %(ver)s.\nUltima versiune a fost publicata pe data de %(date)s",
+			avaible: "<b>Chatbox Actualizari Dispobibile:</b><br />Chatbox-ul nu este actualizat la versiunea %(ver)s.<br />Ultima versiune a fost publicata pe data de %(date)s",
 			not_avaible: "Nu exista versiuni mai noi dispobibile in acest moment.",
 			installed: "FA Chatbox este instalat si actualizat la zi, versiunea actuala este %(ver)s. Ultima actualizare %(date)s",
 			search: "Se cauta noi actualizari disponibile...",
