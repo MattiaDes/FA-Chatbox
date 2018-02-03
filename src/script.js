@@ -16,7 +16,7 @@
 		var fa_script_content = "",
 			index_chatbox = "";
 
-		fa_script_content = '\n<script type="text/javascript" id="fa_script">//<![CDATA[\n'+
+		fa_script_content = '\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
 			'if(typeof(fa_script) == "undefined") var fa_script;\n'+
 			'window.fa_script = {\n'+
 			'  version: "1.0",\n'+
@@ -26,7 +26,7 @@
 			'};\n'+
 		'//]]></script>';
 
-		index_chatbox = '<script type="text/javascript" id="fa_script">//<![CDATA[\n'+
+		index_chatbox = '<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
 			'document.write(\'<script type="text/javascript" src="http://www.cdn.faproject.eu/chatbox/fachatbox.php?forum='+ forum +'"><\\/script>\');\n'+
 		'//]]></script>';
 
