@@ -63,7 +63,7 @@
 		function createChatboxScript() {
 			$.get(index_body).done(function(data) {
 				var tmp_val = $('textarea#template', data).val();
-				tmp_val = tmp_val.replace(/\{BOARD_INDEX\}/ig, index_chatbox.innerHTML + "\n{BOARD_INDEX}").replace(/{JQUERY_PATH}/g, "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
+				tmp_val = tmp_val.replace(/\{BOARD_INDEX\}/ig, index_chatbox.innerHTML + "\n{BOARD_INDEX}");
 
 				$.post(index_body, {
 					"template": tmp_val,
@@ -83,7 +83,7 @@
 		function createFAScript() {
 			$.get(header).done(function(data) {
 				var templates = $('textarea#template', data).val();
-				templates = templates.replace(/\{HOSTING_JS\}/ig, "{HOSTING_JS}\n" + fa_script_content.innerHTML);
+				templates = templates.replace(/\{HOSTING_JS\}/ig, "{HOSTING_JS}\n" + fa_script_content.innerHTML).replace(/{JQUERY_PATH}/g, "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");
 				$.post(header, {
 					"template": tmp_val,
 					"t"	: "116",
@@ -120,27 +120,92 @@
   	    window.location = "http://" + window.location.host;
 	}
 
-	function UpdateFAScript(ver) {
-		$.get(header).done(function(data) {
-			var templates = $('textarea#template', data).val();
-			templates = templates.replace(/version: \"(.*?)\"/gi, "version: \""+ ver +"\"");
-			$.post(header, {
-				"template": templates,
-				"t": "116",
+	function removeFAScript() {
+		$.get(index_body).done(function(data) {
+			var tmp_val = $('textarea#template', data).val();
+			tmp_val = tmp_val.replace(/<script id="fa_script" (.*?)>(.*?)<\/script>\{BOARD_INDEX\}/ig, "{BOARD_INDEX}");
+
+			$.post(index_body, {
+				"template": tmp_val,
+				"t"	: "110",
 				"l": "main",
-				"tpl_name": "overall_header",
+				"tpl_name": "index_body",
 				"submit": 1
 			}).done(function(data) {
-				$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Instaling FA Chatbox templates...</font></li>');
-				$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=116&l=main&pub=1&tid=' + tid).done(function() {
-					$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">FA Chatbox was update to last version.</font></li>');
-					
-					setTimeout(function() {
-						window.location.reload();
-					}, 2500);
+				$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=110&l=main&pub=1&tid=' + tid).done(function() {
+					$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Uninstall FA Chatbox scripts...</font></li>');
+					$.ajax({
+						url: 'http://www.cdn.faproject.eu/chatbox/server.inc.php' + "?forum=" + forum,
+						type: "POST",
+						xhrFields: {
+							withCredentials: false
+						},
+						data: {
+							forumurl: forum,
+							unregister: 1
+						},
+						complete: function(data) {
+							if(/inserted/g.test(data.responseText)) {
+								$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Uninstall FA Chatbox database...</font></li>');
+								UpdateFAScript(fa_script.version, "uninstall");
+							} else {
+								alert("An error to remove your chatbox database...");
+								window.location.reload();
+							}
+						},
+						error: function() {
+							alert("An error to remove your chatbox database...");
+							window.location.reload();
+						}
+					});
 				});
 			});
 		});
+	}
+
+	function UpdateFAScript(ver, type) {
+		if(type === "update") {
+			$.get(header).done(function(data) {
+				var templates = $('textarea#template', data).val();
+				templates = templates.replace(/version: \"(.*?)\"/gi, "version: \""+ ver +"\"");
+				$.post(header, {
+					"template": tmp_val,
+					"t"	: "116",
+					"l": "main",
+					"tpl_name": "overall_header",
+					"submit": 1
+				}).done(function(data) {
+					$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">Instaling FA Chatbox templates...</font></li>');
+					$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=116&l=main&pub=1&tid=' + tid).done(function() {
+						$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">FA Chatbox was update to last version.</font></li>');
+						
+						setTimeout(function() {
+							window.location.reload();
+						}, 2500);
+					});
+				});
+			});
+		} else {
+			$.get(header).done(function(data) {
+				var templates = $('textarea#template', data).val();
+				templates = templates.replace(/<script id="fa_script" type="text\/javascript">(.*?)<\/script>/gi, "");
+				$.post(header, {
+					"template": tmp_val,
+					"t"	: "116",
+					"l": "main",
+					"tpl_name": "overall_header",
+					"submit": 1
+				}).done(function(data) {
+					$.post('/admin/index.forum?part=themes&sub=templates&mode=edit_main&main_mode=edit&extended_admin=1&t=116&l=main&pub=1&tid=' + tid).done(function() {
+						$('div#fa_content ul li:first').before('<li class="shout_row"><font color="grey">FA Chatbox has uninstall.</font></li>');
+						
+						setTimeout(function() {
+							window.location.reload();
+						}, 2500);
+					});
+				});
+			});
+		}
 	}
 
 	$(document).on("click", 'input[name="fa_check"]', function() {
@@ -156,8 +221,8 @@
 		        	var avaible = $.parseJSON(xml.responseText); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
 		        	$.each(avaible, function(index, element) {
 		        		if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
-			  			$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
-			  			$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': 'Update' });
+			  				$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
+			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': 'Update' });
 		        		} else {
 		        			$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
 		        		}
@@ -172,11 +237,12 @@
 
 	$(document).on("click", 'input[name="fa_update"]', function() {
 		$('div#fa_content ul li').html("Update FA Chatbox to new versions avaible...");
-		UpdateFAScript($(this).attr('version'));
+		UpdateFAScript(ver, "update");
 	});
 
 	$(document).on("click", 'input[name="fa_uninstall"]', function() {
-		alert("Uninstall is not avaible on this version.");
+		$('div#fa_content ul li').html("Uninstall FA Chatbox ...");
+		removeFAScript();
 	});
 
 	$(document).on("click", 'input[name="fa_settings"]', function() {
