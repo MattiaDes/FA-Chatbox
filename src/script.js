@@ -7,6 +7,7 @@
 	var index_body = "/admin/index.forum?part=themes&sub=templates&mode=edit_main&t=110&l=main&extended_admin=1&tid=" + tid,
 		header = "/admin/index.forum?part=themes&sub=templates&mode=edit_main&t=116&l=main&extended_admin=1&tid=" + tid;
 	var checkingURL = 'http://www.cdn.faproject.eu/chatbox/check.php';
+	var forum = window.location.host;
 
 	if(typeof(fa_script) == "undefined") {
 		$('#fa_footer center').prepend('<input type="submit" name="fa_install_NotFind" value="Install" />');
