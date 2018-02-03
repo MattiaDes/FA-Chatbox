@@ -234,7 +234,7 @@
 		        	var avaible = $.parseJSON(xml.responseText); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
 		        	$.each(avaible, function(index, element) {
 		        		if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
-			  				$('div#fa_content ul li').html('<font color="red"><b>Chatbox Avaible Updates:</b> <br />Your curent version is not '+ element[is_last].ver +', please update to last version.<br / > Please press on \'Update\' button to update your chatbox to last version.<br />Last script version: ('+ element[is_last].ver +') | Date: '+ element[is_last].update +' | Script URL: ['+ element[is_last].script+']</font>');
+			  				$('div#fa_content ul li').html('<font color="red">'+ lang.avaible.replace(/%\(ver\)s/, element[is_last].ver).replace(/%\(date\)s/g, element[is_last].update).replace(/\/\n/g, "<br />") +'</font>');
 			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': lang["buttons"].update });
 		        		} else {
 		        			$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
