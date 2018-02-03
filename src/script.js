@@ -2,24 +2,33 @@
 	"use strict";
 
 	var tid = $('a[href*="/login?logout=1"]').attr('href').split('&tid=')[1].split('&key')[0];
-	if(!tid) return;
+	if(!tid) throw "Failed find tid key";
 
 	var index_body = "/admin/index.forum?part=themes&sub=templates&mode=edit_main&t=110&l=main&extended_admin=1&tid=" + tid,
 		header = "/admin/index.forum?part=themes&sub=templates&mode=edit_main&t=116&l=main&extended_admin=1&tid=" + tid;
 	var checkingURL = 'http://www.cdn.faproject.eu/chatbox/check.php';
-	var forum = window.location.host;
+	var forum = window.location.host; var lang;
+
+	if(fa_script.lang == "RO") {
+		lang = FA_Chatbox.ro['panel'];
+	} else if(fa_script.lang == "EN") {
+		lang = FA_Chatbox.en['panel'];
+	} else {
+		throw "Lang script not defined.";
+	}
 
 	if(typeof(fa_script) == "undefined") {
 		$('#fa_footer center').prepend('<input type="submit" name="fa_install_NotFind" value="Install" />');
-		$('div#fa_content > ul').html('<li class="shout_row"><font color="red">You not have installed FA Chatbox.</font></li>');
+		$('div#fa_content > ul').html('<li class="shout_row"><font color="red">'+ (typeof(lang) != "undefined") ? lang.not_install : "You not have installed FA Chatbox." +'</font></li>');
 
 		var fa_script_content = "",
 			index_chatbox = "";
 
-		fa_script_content = '\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
+		fa_script_content = '<script id="fa_script" type="text/javascript" src="https://cdn.rawgit.com/SSYT/FA-Chatbox/54af19ce/translate/ro.js"></script>\n<script id="fa_script" type="text/javascript">//<![CDATA[\n'+
 			'if(typeof(fa_script) == "undefined") var fa_script;\n'+
 			'window.fa_script = {\n'+
 			'  version: "1.0",\n'+
+			'  lang: "RO",\n'+
 			'  pos: \'position-top\',\n'+
 			'  install: true,\n'+
 			'  forum: "'+ forum +'"\n'+
@@ -112,7 +121,11 @@
 	if(typeof(fa_script) !== "undefined" && fa_script.install == false) {
 		$('#fa_footer center').prepend('<input type="submit" name="fa_install_find" value="Install" />');
 	} else if(typeof(fa_script) !== "undefined" && fa_script.install == true) {
-		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">Your chatbox was update to date. | Curent version usage chatbox: '+ fa_script.version +' (Last Update: 02.01.2018)</font></li>');
+		if(typeof(lang) !== "undefined") {
+			lang.installed = lang.installed.replace(/%(ver)s/ig, fa_script.version);
+		}
+
+		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">'+ lang.installed +' (Last Update: 02.01.2018)</font></li>');
 		$('#fa_footer center').html('<input type="submit" name="fa_uninstall" value="Uninstall"><input type="submit" name="fa_check" value="Check Update"><input type="submit" name="fa_settings" value="Settings">');
 	}
 
@@ -210,7 +223,7 @@
 	}
 
 	$(document).on("click", 'input[name="fa_check"]', function() {
-		$('div#fa_content ul li').html("Checking new versions avaible...");
+		$('div#fa_content ul li').html((typeof(lang) !== "undefined") ? lang.search : 'Se cauta noi actualizari disponibile...');
 		setTimeout(function() {
 			$.ajax({
 		        type: 'GET',
