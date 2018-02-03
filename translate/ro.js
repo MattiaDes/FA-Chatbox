@@ -34,6 +34,9 @@
 			not_avaible: "Nu exista versiuni mai noi dispobibile in acest moment.",
 			installed: "FA Chatbox este instalat si actualizat la zi, versiunea actuala este %(ver)s. Ultima actualizare %(date)s",
 			search: "Se cauta noi actualizari disponibile...",
+			not_install: "FA Chatbox nu este instalat pe acest forum.",
+			update: "Se actualizeaza FA Chatbox la o versiune noua...",
+			remove: "Se dezinstaleaza FA Chatbox..."
 		},
 
 		chatbox: {
