@@ -1,0 +1,266 @@
+div#fa_header {
+    background: #556e80;
+    width: auto;
+    min-height: 40px;
+    border-radius: 2px 2px 0 0;
+    box-shadow: inset 0 7px 10px #6d7c84;
+    line-height: 30px;
+    font-size:  12px;
+    font-weight: 400;
+    color: #ffffff;
+    padding: 0 10px;
+}
+
+div#smiley-box > div {
+    display:  block;
+    clear:  both;
+    overflow:  auto;
+    padding: 1px;
+    text-align:  center;
+    padding-left: 10px;
+}
+
+span#sections {
+    display:  block;
+    padding: 5px 10px;
+    background: #fff;
+    width: 96%;
+    float:  left;
+    margin-left: -5px;
+    margin-top:  10px;
+    text-align: center;
+}
+
+span#sections > b {
+    margin-right:  5px;
+    color: #000;
+}
+
+#smiley-box, .smile-status-box, #settings-box {
+    background-color: #ecf3f7;
+    width: 20%;
+    position: absolute;
+    padding: 5px;
+    border: 1px solid #0000002b;
+    min-height: 150px;
+    border-radius: 3px;
+}
+
+div#fa_notif_c {
+    position:  fixed;
+    z-index:  10000;
+    right: 10px;
+    top: 10px;
+    background-color: #00000099;
+    color:  white;
+    padding: 5px 10px;
+    line-height: 35px;
+    border-radius:  4px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+div#fa_notif_c > i {
+    color: #e8c237;
+}
+
+div#fa_shoutbox {
+    overflow:  hidden;
+    height:  auto;
+    display:  block;
+    z-index: 999;
+    border: 1px solid #eaeaea;
+    border-top: 0;
+}
+
+i.fa.fa-info-circle {
+    font-size: 20px;
+    position:  relative;
+    top: 11px;
+    left: 5px;
+    color: #58c5a7;
+    box-shadow: 0 2px 0px #0000002b;
+    background:  transparent;
+}
+
+#fa_footer form {
+    display: inline-block;
+    height: 40px;
+    overflow: hidden;
+    width: 40%;
+    float: right;
+}
+
+div#fa_footer left {
+    color: #000;
+    font-size: 20px;
+    margin-left: 10px;
+    position: relative;
+    top: 11px;
+    float: right;
+    right: 1%;
+}
+
+div#fa_footer {
+    display:  block;
+    width:  100%;
+    height:  40px;
+    background: #f1f1f1;
+}
+
+input[name="fa_message"] {
+    width: 80%;
+    padding: 8px;
+    position:  relative;
+    top: 5px;
+    display:  inline-block;
+    border-radius:  3px;
+    border: 1px solid #fff;
+}
+
+#fa_footer form {
+    float:  right;
+    width: 40%;
+    overflow:  hidden;
+    height: 40px;
+    display: inline-block;
+}
+
+input[name="fa_send"] {
+    background: #556e80;
+    padding: 7px 15px;
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    margin-left: 5px;
+    box-shadow: inset 0 7px 10px #6d7c84;
+    border: 0;
+    color:  white;
+}
+
+div#fa_footer left > i {
+    margin-right: 10px;
+}
+
+div#fa_footer left {
+    color: #000;
+    font-size: 20px;
+    margin-left: 10px;
+    position: relative;
+    top: 11px;
+}
+
+div#fa_footer left
+ i.fa-cog {
+    color: #5891cc;
+}
+
+i.fa.fa-volume-down {
+    color: #34a8bb;
+}
+
+i.fa.fa-smile-o {
+    color: #ffc520;
+}
+
+li.shout_row {
+    padding: 5px 7px;
+    width: 99%;
+    display: inline-block;
+    clear: both;
+    min-height: 30px;
+    border-bottom: 1px solid #8888881f;
+    line-height: 30px;
+}
+
+li.shout_row span.time {
+    float: right;
+}
+
+span.bot-msg {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Arial', sans-serif;
+}
+
+span.fa-avatar {
+    display: block;
+    float: left;
+    overflow: hidden;
+    padding: 1px;
+    width: 45px;
+    height: 40px;
+}
+
+span.fa-avatar > img {
+    width:  30px;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid #0000003d;
+    padding: 1px;
+}
+
+span.msg {
+    word-wrap:  break-word;
+    display:  block;
+    width: 80%;
+}
+
+span.user-msg {
+    display:  inline-block;
+    line-height: 20px;
+    width: 85%;
+    float:  left;
+}
+
+div#tables {
+    float:  right;
+    display: block;
+    height: 250px;
+    max-height: 250px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: unset;
+    width: 20%;
+}
+
+div#tables > span {
+    padding: 10px 10px;
+    clear: both;
+    display: block;
+    background:  #fff;
+    border-bottom: 1px solid #0000001c;
+    font-size:  12px;
+    font-weight:  800;
+}
+
+div#tables > span.active {
+    color: #5da9ea;
+}
+
+div#fa_content {
+    display: block;
+    height: 250px;
+    max-height: 250px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: unset;
+    width: 80%;
+    float: left;
+    clear: left;
+}
+
+div#fa_footer {
+    background: #f1f1f1;
+    display: block;
+    height: 40px;
+    width: 100%;
+    clear: both;
+}
+
+li.shout_row span.time {
+    float: right;
+    margin-right: 10px;
+}
