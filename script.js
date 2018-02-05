@@ -118,14 +118,14 @@
 
 	// Other after chatbox was installed
 	if(typeof(fa_script) !== "undefined" && fa_script.install == false) {
-		$('#fa_footer center').prepend('<input type="submit" name="fa_install_find" value="'+ lang["buttons"].install +'" />');
+		$('#fa_shoutbox:not(".settings") #fa_footer center').prepend('<input type="submit" name="fa_install_find" value="'+ lang["buttons"].install +'" />');
 	} else if(typeof(fa_script) !== "undefined" && fa_script.install == true) {
 		if(typeof(lang) !== "undefined") {
 			lang.installed = lang.installed.replace(/%\(ver\)s/ig, fa_script.version);
 		}
 
-		$('div#fa_content > ul').html('<li class="shout_row"><font color="green">'+ lang.installed.replace(/%\(date\)s/g, "03.02.2017") +' </font></li>');
-		$('#fa_footer center').html('<input type="submit" name="fa_uninstall" value="'+ lang["buttons"].uninstall +'"><input type="submit" name="fa_check" value="'+ lang["buttons"].check_update +'"><input type="submit" name="fa_settings" value="'+ lang["buttons"].settings +'">');
+		$('#fa_shoutbox:not(".settings") div#fa_content > ul').html('<li class="shout_row"><font color="green">'+ lang.installed.replace(/%\(date\)s/g, "03.02.2017") +' </font></li>');
+		$('#fa_shoutbox:not(".settings") #fa_footer center').html('<input type="submit" name="fa_uninstall" value="'+ lang["buttons"].uninstall +'"><input type="submit" name="fa_check" value="'+ lang["buttons"].check_update +'"><input type="submit" name="fa_settings" value="'+ lang["buttons"].settings +'">');
 	}
 
 	if(_userdata.user_level == 0) {
