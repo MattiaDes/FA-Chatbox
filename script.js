@@ -234,10 +234,10 @@
 		        	var avaible = $.parseJSON(xml.responseText); var is_last = (avaible.versions.length == 0) ? 0 : parseInt(avaible.versions.length-1);
 		        	$.each(avaible, function(index, element) {
 		        		if(!(new RegExp(fa_script.version, 'g').test(element[is_last].ver))) {
-			  				$('div#fa_content ul li').html('<font color="red">'+ lang.avaible.replace(/%\(ver\)s/, element[is_last].ver).replace(/%\(date\)s/g, element[is_last].update).replace(/\/\n/g, "<br />") +'</font>');
+			  				$('div#fa_content ul li').html('<font color="red">'+ lang.avaible.replace(/%\(ver\)s/, element[is_last].ver).replace(/%\(date\)s/g, element[is_last].update) +'</font>');
 			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': lang["buttons"].update });
 		        		} else {
-		        			$('div#fa_content ul li').html('<font color="green">Your chatbox was update to date. | Curent version: v'+ element[is_last].ver +' (Last Update - '+ element[is_last].update +')</font>');
+		        			$('div#fa_content ul li').html('<font color="red">'+ lang.not_avaible + lang.installed.replace(/%\(ver\)s/g, element[is_last].ver).replace(/%\(date\)s/g, element[is_last].update) +'</font>');
 		        		}
 		        	});
 		        },
@@ -250,7 +250,7 @@
 
 	$(document).on("click", 'input[name="fa_update"]', function() {
 		$('div#fa_content ul li').html(lang['update']);
-		UpdateFAScript(ver, "update");
+		UpdateFAScript($('input[name="fa_update"]').attr('version'), "update");
 	});
 
 	$(document).on("click", 'input[name="fa_uninstall"]', function() {
