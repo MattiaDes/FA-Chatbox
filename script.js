@@ -237,7 +237,7 @@
 			  				$('div#fa_content ul li').html('<font color="red">'+ lang.avaible.replace(/%\(ver\)s/, element[is_last].ver).replace(/%\(date\)s/g, element[is_last].update) +'</font>');
 			  				$('input[name="fa_check"]').attr({ 'name': 'fa_update', 'version': element[is_last].ver, 'value': lang["buttons"].update });
 		        		} else {
-		        			$('div#fa_content ul li').html('<font color="red">'+ lang.not_avaible + lang.installed.replace(/%\(ver\)s/g, element[is_last].ver).replace(/%\(date\)s/g, element[is_last].update) +'</font>');
+		        			$('div#fa_content ul li').html('<font color="green">'+ lang.not_avaible + lang.installed.replace(/%\(ver\)s/g, element[is_last].ver).replace(/%\(date\)s/g, element[is_last].update) +'</font>');
 		        		}
 		        	});
 		        },
