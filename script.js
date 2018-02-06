@@ -262,6 +262,11 @@
 		$('div#fa_shoutbox.control-panel').hide();
 		$('div#fa_shoutbox.settings').show();
 	});
+	
+	$(document).on("click", "input[name=\"fa_cancel"\"]", function() {
+		$('div#fa_shoutbox.control-panel').show();
+		$('div#fa_shoutbox.settings').hide();
+	});
 
 	$("form[name=\"fa-settings\"] dl dd + dd").hover(function() {
 		if(this.id != "edit") {
@@ -276,19 +281,19 @@
 	});
 
 	$(document).on("click", "i.hover", function() {
-	  $(this).hide();
-	  $(this).parent().attr('id', 'edit');
-	  $(this).next().removeAttr('readonly');
-	  $(this).next().after('<i class="fa fa-pencil-square-o edited" aria-hidden="true" />');
-	  $(this).remove();
+		$(this).hide();
+		$(this).parent().attr('id', 'edit');
+		$(this).next().removeAttr('readonly');
+		$(this).next().after('<i class="fa fa-pencil-square-o edited" aria-hidden="true" />');
+		$(this).remove();
 	});
 
 	$(document).on("click", "i.edited", function() {
-	  $(this).hide();
-	  $(this).parent().removeAttr('id', 'edit');
-	  $(this).prev().attr('readonly');
-	  $(this).prev().val($(this).prev().val());
-	  $(this).remove();
+		$(this).hide();
+		$(this).parent().removeAttr('id', 'edit');
+		$(this).prev().attr('readonly');
+		$(this).prev().val($(this).prev().val());
+		$(this).remove();
 	});
 
 	"Copyright to SSYT 2.0, all right reserved";
