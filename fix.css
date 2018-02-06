@@ -1,0 +1,73 @@
+input[name="fa_uninstall"], input[name="fa_cancel"], input[name="fa_check"], input[name="fa_settings"], input[name="fa_update"], input[name="fa_install_NotFind"] {
+    background: #556e80;
+    padding: 7px 15px;
+    position: relative;
+    top: 7px;
+    display: inline-block;
+    margin-left: 5px;
+    box-shadow: inset 0 7px 10px #6d7c84;
+    border: 0;
+    color: white;
+}
+  
+div#fa_header::after {
+    content: "FA Panel (v0.1) by SSYT 2.0";
+    float: right;
+    font-size: 10px;
+    margin-top: 4px;
+}
+  
+li.shout_row {
+    line-height: 20px;
+}
+  
+div#fa_shoutbox {
+    overflow: hidden;
+    height: auto;
+    display: block;
+    z-index: 999;
+    border: 1px solid #423a3a21;
+    border-top: 0;
+}
+  
+div#fa_shoutbox.settings form dl {
+    min-height: 20px;
+    display: block;
+    clear: both;
+    padding: 5px;
+    line-height: 20px;
+    font-size: 12px;
+}
+  
+div#fa_shoutbox.settings form dl dd {
+    display: inline-block;
+    text-align: left;
+}
+  
+div#fa_shoutbox.settings form input[type="text"] {
+    width: 90%;
+    font-size: 11px;
+    padding: 5px;
+    color: #607D8B;
+}
+  
+input[name="fa_updates"] {
+    border: 0;
+    font-size: 13px !important;
+    padding: 5px;
+    display: block;
+    font-family: MONOSPACE;
+    color: #607D8B;
+    float: left;
+}
+  
+div#fa_shoutbox.settings form dl dd i {
+    float:  left;
+    display:  inline-block;
+    margin-top: 7px;
+    color: #607D8B;
+}
+  
+dd#edit input {
+    border: 1px solid #607d8b1f;
+}
