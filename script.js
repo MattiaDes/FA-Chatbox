@@ -258,8 +258,37 @@
 		removeFAScript();
 	});
 
-	$(document).on("click", 'input[name="fa_settings"]', function() {
-		alert("Settings is not avaible on this version.");
+	$(document).on("click", "input[name=\"fa_settings\"]", function() {
+		$('div#fa_shoutbox.control-panel').hide();
+		$('div#fa_shoutbox.settings').show();
+	});
+
+	$("form[name=\"fa-settings\"] dl dd + dd").hover(function() {
+		if(this.id != "edit") {
+			if(!(this.id == "field_updates_8")) {
+				$(this).addClass('hover');
+				$(this).prepend('<i class="fa fa-exchange hover" aria-hidden="true" />');
+			}
+		}
+	}, function() {
+		$(this).removeClass('hover');
+		$('i.hover', this).remove();
+	});
+
+	$(document).on("click", "i.hover", function() {
+	  $(this).hide();
+	  $(this).parent().attr('id', 'edit');
+	  $(this).next().removeAttr('readonly');
+	  $(this).next().after('<i class="fa fa-pencil-square-o edited" aria-hidden="true" />');
+	  $(this).remove();
+	});
+
+	$(document).on("click", "i.edited", function() {
+	  $(this).hide();
+	  $(this).parent().removeAttr('id', 'edit');
+	  $(this).prev().attr('readonly');
+	  $(this).prev().val($(this).prev().val());
+	  $(this).remove();
 	});
 
 	"Copyright to SSYT 2.0, all right reserved";
