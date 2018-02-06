@@ -263,7 +263,7 @@
 		$('div#fa_shoutbox.settings').show();
 	});
 	
-	$(document).on("click", "input[name=\"fa_cancel"\"]", function() {
+	$(document).on("click", "input[name=\"fa_cancel\"]", function() {
 		$('div#fa_shoutbox.control-panel').show();
 		$('div#fa_shoutbox.settings').hide();
 	});
