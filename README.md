@@ -4,7 +4,7 @@ FA is a free open-source code written in jQuery/PHP.
 
 ## AUTOMATED TESTING
 
-**N/A**
+[![Build Status](https://travis-ci.org/SSYT/FA-Chatbox.svg?branch=master)](https://travis-ci.org/SSYT/FA-Chatbox)
 
 ## Development
 
