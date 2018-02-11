@@ -4,8 +4,11 @@ FA is a free open-source code written in jQuery/PHP.
 
 ## AUTOMATED TESTING
 
-* [![Build Status](https://travis-ci.org/phpbb/phpbb.svg?branch=3.1.x)](http://travis-ci.org/phpbb/phpbb) **1.0.x** -
-Development of version 1.0.x
+**N/A**
+
+## Development
+
+**1.0.x** - Development of version 1.0.x
 
 ## LICENSE
 
