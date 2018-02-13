@@ -303,7 +303,7 @@
 		                    localStorage.setItem('sound_notif', 1);
 		                    localStorage.setItem('total_shouts_' + tab, parseInt($('#fa_content ul li:has(".user")').length));
 
-		                    console.log("New message has been posted in chatbox.");
+		                    // console.log("New message has been posted in chatbox.");
 		                    
 		                    setTimeout(function() {
 		                        $('#fa_notif, #fa_notif_c').remove();
@@ -351,6 +351,105 @@
 				alert(err);
 			});
 		},
+		
+		execCMD: function(cmdName) {
+		    var formData = new FormData(),
+		        tableName = $('div#tables > span.active').attr('data-name'),
+		        tablePerms = $('div#tables > span.active').attr('data-perms');
+		    var message_data = $("div#fa_footer input[name=\"fa_message\"]").val();
+		    switch(cmdName) {
+		        case '/help':
+		            alert("Open Commands list:\n/help");
+		            break;
+		            
+		        case '/cls':
+		            formData.append('forumurl', window.location.host);
+		            formData.append('table', tableName);
+		            formData.append('user', encodeURIComponent(_userdata.username));
+		            formData.append('table_perm', tablePerms);
+		            formData.append('method', 'clear');
+		            
+                    fetch($.FA_Chatbox.dbURL, {
+                      method: 'POST',
+                      body: formData
+                    }).then(function(response) {
+        				return response.text();
+        			}).then(function(returnedValue) {
+        			    // console.log(returnedValue);
+        			    $.FA_Chatbox.get(tableName);
+        			}).catch(function(err) {
+        				alert(err);
+        			});
+		            break;
+		            
+		        case '/clear':
+		            formData.append('forumurl', window.location.host);
+		            formData.append('table', tableName);
+		            formData.append('user', encodeURIComponent(_userdata.username));
+		            formData.append('table_perm', tablePerms);
+		            formData.append('method', 'clear');
+		            
+                    fetch($.FA_Chatbox.dbURL, {
+                      method: 'POST',
+                      body: formData
+                    }).then(function(response) {
+        				return response.text();
+        			}).then(function(returnedValue) {
+        			    // console.log(returnedValue);
+        			    $.FA_Chatbox.get(tableName);
+        			}).catch(function(err) {
+        				alert(err);
+        			});
+		            break;
+		            
+		        case '/me':
+		            formData.append('forumurl', window.location.host);
+		            formData.append('table', tableName);
+		            formData.append('user', encodeURIComponent(_userdata.username));
+		            formData.append('message', encodeURIComponent(message_data.split('/me ')[1]));
+		            formData.append('table_perm', tablePerms);
+		            formData.append('method', 'me');
+		            
+                    fetch($.FA_Chatbox.dbURL, {
+                      method: 'POST',
+                      body: formData
+                    }).then(function(response) {
+        				return response.text();
+        			}).then(function(returnedValue) {
+        			    $.FA_Chatbox.get(tableName);
+        			}).catch(function(err) {
+        				alert(err);
+        			});
+		            break;
+		            
+		        case '/kick':
+		            alert("no avaible for the moment.");
+		            break;
+		            
+		        case '/ban':
+		            alert("no avaible for the moment.");
+		            break;
+		            
+                case '/unban':
+                    alert("no avaible for the moment.");
+                    break;
+                    
+                case '/mod':
+                    var user = message_data.indexOf(message_data.split('/mod <')[1].split('>')[0]);
+                    if(GetUsersStaff(user) !== false) alert("Are deja drepturi de moderare");
+                    
+                    break;
+                    
+                case '/unmod':
+                    var user2 = message_data.indexOf(message_data.split('/unmod <')[1].split('>')[0]);
+                    if(GetUsersStaff(user2) !== true) alert("Nu are drepturi de moderare");
+                    break;
+
+                case '/banlist':
+                    alert("no avaible for the moment.");
+                    break;
+		    }
+		},
 
 		send: function() {
 			var isCMD = null,
@@ -368,9 +467,8 @@
 			}
 
 			if(isCMD) {
-				if(RegExpEx("/help").test(isCMD)) {
-
-				}
+			    $.FA_Chatbox.execCMD(isCMD);
+			    $("div#fa_footer input[name=\"fa_message\"]").val("");
 			} else if(!isCMD && clean_message !== "") {
 			    var $tabname = $('div#tables > span.active').attr('data-name');
 			    
@@ -394,7 +492,7 @@
                 }).then(function(response) {
     				return response.text();
     			}).then(function(returnedValue) {
-    			    console.log(returnedValue);
+    			    // console.log(returnedValue);
     			    $.FA_Chatbox.get($('div#tables > span.active').attr('data-name'));
     			}).catch(function(err) {
     				alert(err);
@@ -483,7 +581,7 @@
                         if(new RegExp(emj, 'g').test(hem[i].find)) {} else {
                             hem.push({"find": emj});
                             my_setcookie('emoji', JSON.stringify(hem));
-                            console.log("push");
+                            // console.log("push");
                             //$.FA_Chatbox.history.push();
                         }
                     }
@@ -493,7 +591,7 @@
             $(document).on("click", "#sections b i", function() {
                 var id = $(this).parent().attr('id');
                 $('#sections b.active').removeClass('active');
-                console.log('click on' + id);
+                // console.log('click on' + id);
                 if($(this).parent().attr('class') !== "active-tab") {
                     $('div#fa_smiley div[id].active-tab').removeClass('active-tab').hide();
                     $('div#fa_smiley div#' + id).attr({
@@ -538,7 +636,7 @@
         				alert(err);
         			});
                 }
-                console.info("%cTotal Active messages on this = " + total, "font-size: 12px; color: green");
+                // console.info("%cTotal Active messages on this = " + total, "font-size: 12px; color: green");
             }, 5000);
             
             console.info("%cWelcome to console. Here is only admin developers zone.\nYou have installed FA Module. For more informations type FA.info()", "font-size: 14px; color: #34a8bb; font-weight: 600");
@@ -560,20 +658,22 @@
             
             $.FA_Chatbox.timers[1] = setInterval(function() {
                 $.FA_Chatbox.notifications($tabname, 5000);
-                console.log('called');
+                // console.log('called');
             }, 500);
 		}
 	};
 
 	$.FA_Chatbox.init();
-	
-	window.FA = {
-		info: function() {
-		    console.clear();
-		    console.info("%cWelcome to FA Module Informations", "font-size: 12px; color: green");
-		    console.info("%cFA Module is javascript code for fdf forums, only fdf forum it\'s allow to use.", "font-size: 12px; color: green");
-		    console.info("%cFA Module is a open source code, free source for all, code is hosted on %cGithub", "font-size: 12px; color: green", "color: grey");
-		    console.info("%cFor more informations and codes follow this. %chttps://github.com/SSYT", "font-size: 12px; color: green", "color: grey");
-		}
-	};
+})(jQuery);
+
+(function() {
+    window.FA = {
+        info: function() {
+            console.clear();
+            console.info("%cWelcome to FA Module Informations", "font-size: 12px; color: green");
+            console.info("%cFA Module is javascript code for fdf forums, only fdf forum it\'s allow to use.", "font-size: 12px; color: green");
+            console.info("%cFA Module is a open source code, free source for all, code is hosted on %cGithub", "font-size: 12px; color: green", "color: grey");
+            console.info("%cFor more informations and codes follow this. %chttps://github.com/SSYT", "font-size: 12px; color: green", "color: grey");
+        }
+    };
 })(jQuery);
